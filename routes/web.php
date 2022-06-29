@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CastController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -22,4 +23,5 @@ Route::get('/', function () {
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function(){
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::resource('/tag', TagController::class);
+    Route::resource('/cast', CastController::class);
 });

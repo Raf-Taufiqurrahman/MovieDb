@@ -20,7 +20,7 @@ class TagController extends Controller
 
         $tags = Tag::when($search, function($query) use($search){
             $query = $query->where('name', 'like', '%'.$search.'%');
-        })->paginate(10);
+        })->paginate(6)->withQueryString();
 
         return view('admin.tag.index', compact('tags', 'search'));
     }

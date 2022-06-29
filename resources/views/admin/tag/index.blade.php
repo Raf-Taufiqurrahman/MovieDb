@@ -2,7 +2,7 @@
 
 @section('content')
     <x-container>
-        <div class="col-8">
+        <div class="col-12 col-md-8">
             <x-card-action title="Tags" class="card-body p-0" :url="route('admin.tag.index')" :value="$search" name="search">
                 <x-table>
                     <thead>
@@ -37,8 +37,9 @@
                     </tbody>
                 </x-table>
             </x-card-action>
+            <div class="d-flex justify-content-end">{{ $tags->links() }}</div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <x-card title="Create Tag" class="card-body">
                 <form action="{{ route('admin.tag.store') }}" method="POST">
                     @csrf
