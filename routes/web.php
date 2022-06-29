@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function(){
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 });
