@@ -18,8 +18,13 @@
                             <tr>
                                 <td>{{ $i + $casts->firstItem() }}</td>
                                 <td>
-                                    <span class="avatar rounded avatar-md"
-                                        style="background-image: url({{ $cast->photo }})"></span>
+                                    @if ($cast->created_at == $cast->updated_at)
+                                        <span class="avatar rounded avatar-md"
+                                            style="background-image: url({{ 'https://image.tmdb.org/t/p/w500/' . $cast->photo }})"></span>
+                                    @else
+                                        <span class="avatar rounded avatar-md"
+                                            style="background-image: url({{ asset('storage/casts/' . $cast->photo) }})"></span>
+                                    @endif
                                 </td>
                                 <td>{{ $cast->name }}</td>
                                 <td>

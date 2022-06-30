@@ -13,10 +13,4 @@ class Cast extends Model
 
     protected $fillable = ['tmdb_id', 'name', 'slug', 'photo'];
 
-    protected function photo(): Attribute
-    {
-        return Attribute::make(
-            get: fn($photo) => 'https://image.tmdb.org/t/p/w500/'. $photo,
-        );
-    }
 }
