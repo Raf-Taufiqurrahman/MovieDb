@@ -10,7 +10,7 @@
                             <th>#</th>
                             <th>Photo</th>
                             <th>Name</th>
-                            <th>Aksi</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

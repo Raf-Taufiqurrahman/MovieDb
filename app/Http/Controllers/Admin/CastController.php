@@ -63,7 +63,6 @@ class CastController extends Controller
             // if cast failed, return back with error message
             return back()->with('toast_error', 'Cast not found');
         }
-
     }
 
     /**
