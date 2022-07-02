@@ -10,5 +10,5 @@ class Genre extends Model
 {
     use HasFactory, Slug;
 
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['tmdb_id', 'name', 'slug'];
 }

@@ -2,12 +2,16 @@
 
 @section('content')
     <x-container>
-        <div class="col-12 col-md-8">
+        <div class="col-12">
+            <form action="{{ route('admin.genre.store') }}" method="POST" class="mb-3">
+                @csrf
+                <button class="btn btn-dark" type="submit">Generate Genre</button>
+            </form>
             <x-card-action title="Genres" class="card-body p-0" :url="route('admin.genre.index')" :value="$search" name="search">
                 <x-table>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th style="width: 10px">#</th>
                             <th>Genre Name</th>
                             <th>Action</th>
                         </tr>
@@ -38,16 +42,6 @@
                 </x-table>
             </x-card-action>
             <div class="d-flex justify-content-end">{{ $genres->links() }}</div>
-        </div>
-        <div class="col-12 col-md-4">
-            <x-card title="Create Genre" class="card-body">
-                <form action="{{ route('admin.genre.store') }}" method="POST">
-                    @csrf
-                    <x-input title="Name" name="name" type="text" placeholder="Input genre name"
-                        :value="old('name')" />
-                    <button type="submit" class="btn btn-dark">Create</button>
-                </form>
-            </x-card>
         </div>
     </x-container>
 @endsection

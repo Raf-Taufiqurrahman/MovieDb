@@ -17,8 +17,10 @@ class GenreController extends Controller
      */
     public function index(Request $request)
     {
+        // define request search
         $search = $request->search;
 
+        // get all genre with paginate and search
         $genres = Genre::when($search, function($query) use($search){
             $query = $query->where('name', 'like', '%'.$search.'%');
         })->paginate(6)->withQueryString();
@@ -34,23 +36,20 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-  // check genre name is exist or not
-        $data = Genre::where('name', $request->name)->first();
-
-        // if exist, return back with error message
-        if($data){
-            return back()->with('toast_error', 'Genre already exists');
-        }
-
-        // get genre from tmdb api where genre name same $request->name
+        // get genre from tmdb api
         $genre = Http::withToken(config('services.mdb.token'))->get('https://api.themoviedb.org/3/genre/movie/list');
 
         // if genre success
         if($genre->successful()){
+            // make genre to json
             $genreJson = $genre->json();
+            // foreach genre
             foreach($genreJson as $dataGenre){
+                // foreach data genre when create
                 foreach($dataGenre as $nameGenre){
-                    $genre = Genre::where('tmbd_id', $nameGenre['id'])->first();
+                    // check if tmbd_id is exist or not
+                    $genre = Genre::where('tmdb_id', $nameGenre['id'])->first();
+                    // if not exist, create new genre
                     if(!$genre){
                         Genre::create([
                             'tmdb_id' => $nameGenre['id'],
@@ -59,33 +58,12 @@ class GenreController extends Controller
                     }
                 }
             }
-            return back()->with('toast_succes', 'Genre created successfully');
+            // return back with success message
+            return back()->with('toast_success', 'Genre created successfully');
         }else{
             // if genre failed, return back with error message
             return back()->with('toast_error', 'Genre not found');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -95,9 +73,12 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Genre $genre)
     {
-        //
+        // update genre by id
+        $genre->update($request->all());
+
+        return back()->with('toast_success', 'Genre updated successfully');
     }
 
     /**
@@ -106,8 +87,11 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Genre $genre)
     {
-        //
+        // delete genre by id
+        $genre->delete();
+
+        return back()->with('toast_success', 'Genre deleted successfully');
     }
 }

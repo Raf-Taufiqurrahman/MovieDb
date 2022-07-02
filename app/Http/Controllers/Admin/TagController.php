@@ -16,8 +16,10 @@ class TagController extends Controller
      */
     public function index(Request $request)
     {
+        // define request search
         $search = $request->search;
 
+        // get all cast with paginate and search
         $tags = Tag::when($search, function($query) use($search){
             $query = $query->where('name', 'like', '%'.$search.'%');
         })->paginate(6)->withQueryString();
@@ -33,6 +35,7 @@ class TagController extends Controller
      */
     public function store(TagRequest $request)
     {
+        // create new tag
         Tag::create($request->validated());
 
         return back()->with('toast_success', 'Tag created successfully');
@@ -47,6 +50,7 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
+        // update tag by id
         $tag->update($request->all());
 
         return back()->with('toast_success', 'Tag updated successfully');
@@ -60,6 +64,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        // delete tag by id
         $tag->delete();
 
         return back()->with('toast_success', 'Tag deleted successfully');
