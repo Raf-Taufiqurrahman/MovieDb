@@ -113,6 +113,24 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.movie*') ? 'active' : '' }}"
+                        href="{{ route('admin.movie.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-tv"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <rect x="3" y="7" width="18" height="13" rx="2">
+                                </rect>
+                                <polyline points="16 3 12 7 8 3"></polyline>
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Movie
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

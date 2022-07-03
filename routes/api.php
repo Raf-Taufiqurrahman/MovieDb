@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/test', function (Request $request) {
+    return
+    Http::get('http://api.themoviedb.org/3/movie/150689?api_key=d3afa7f6a17ff2ea883b741ad72ecdc1&language=en-US');
+
 });

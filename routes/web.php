@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\CastController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,5 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], 
     Route::resource('/tag', TagController::class);
     Route::resource('/cast', CastController::class);
     Route::resource('/genre', GenreController::class);
+    Route::resource('/movie', MovieController::class);
 });

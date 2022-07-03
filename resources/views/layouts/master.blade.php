@@ -99,6 +99,15 @@
             })
         }
     </script>
+    <!-- Advance tag select -->
+    <script>
+        $(document).ready(function() {
+            $('#select-tags-advanced').selectize({
+                maxItems: 15,
+                plugins: ['remove_button'],
+            });
+        });
+    </script>
     @stack('js')
 </body>
 

@@ -11,4 +11,9 @@ class Genre extends Model
     use HasFactory, Slug;
 
     protected $fillable = ['tmdb_id', 'name', 'slug'];
+
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class);
+    }
 }
